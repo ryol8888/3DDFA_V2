@@ -36,7 +36,7 @@ class TrianglesMeshRender(object):
             raise Exception(f'{clibs} not found, please build it first, by run '
                             f'"gcc -shared -Wall -O3 render.c -o render.so -fPIC" in utils/asset directory')
 
-        self._clibs = ctypes.CDLL(clibs)
+        # self._clibs = ctypes.CDLL(clibs)
 
         self._light = np.array(light, dtype=np.float32)
         self._light = np.ctypeslib.as_ctypes(self._light)
@@ -61,7 +61,7 @@ class TrianglesMeshRender(object):
         )
 
 
-render_app = TrianglesMeshRender(clibs=make_abs_path('asset/render.so'))
+# render_app = TrianglesMeshRender(clibs=make_abs_path('asset/render.so'))
 
 
 def render(img, ver_lst, tri, alpha=0.6, show_flag=False, wfp=None, with_bg_flag=True):
@@ -72,7 +72,7 @@ def render(img, ver_lst, tri, alpha=0.6, show_flag=False, wfp=None, with_bg_flag
 
     for ver_ in ver_lst:
         ver = np.ascontiguousarray(ver_.T)  # transpose
-        render_app(ver, tri, bg=overlap)
+        # render_app(ver, tri, bg=overlap)
 
     if with_bg_flag:
         res = cv2.addWeighted(img, 1 - alpha, overlap, alpha, 0)
